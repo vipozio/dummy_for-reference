@@ -1,17 +1,23 @@
 API Response (InvokeHTTP)
     |
     v
+RouteOnAttribute (detect HTTP errors and empty body responses)
+    |         |         |
+    |         |         +--> LogMessage (log empty body responses)
+    |         +--> LogMessage (log HTTP errors)
+    +--> success (valid HTTP responses)
+              |
+              v
 AttributesToJSON (convert JSON to FlowFile content)
     |
     v
 EvaluateJsonPath (extract attributes)
     |
     v
-RouteOnAttribute (check for empty attributes)
-    |         |         |
-    |         |         +--> LogMessage (log missing attributes)
+RouteOnAttribute (check for empty data)
+    |         |
     |         +--> LogMessage (log missing attributes)
-    +--> unmatched (non-empty attributes)
+    +--> unmatched (valid attributes)
               |
               v
 ValidateRecord (validate JSON schema)
