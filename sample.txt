@@ -24,3 +24,9 @@ ValidateRecord (validate JSON schema)
     |         |
     |         +--> LogMessage (log schema validation failures)
     +--> success (valid JSON data)
+              |
+              v
+MergeContent (consolidate error messages)
+    |
+    v
+PutEmail (send consolidated email alert)
