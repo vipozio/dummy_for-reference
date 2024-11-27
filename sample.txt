@@ -1,8 +1,12 @@
 CREATE TABLE job_master (
-    job_id SERIAL PRIMARY KEY,
-    process_group_id VARCHAR(255) NOT NULL,
-    process_description TEXT,
-    process_schedule_start_time TIME NOT NULL,
-    active_status BOOLEAN DEFAULT TRUE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    job_id SERIAL PRIMARY KEY, -- Unique identifier for the job
+    process_group_id VARCHAR(255) NOT NULL, -- NiFi process group ID
+    process_description TEXT, -- Description of the job
+    process_schedule_start_time TIME NOT NULL, -- Scheduled start time
+    active_status BOOLEAN DEFAULT TRUE, -- Whether the job is active or not
+    last_run_datetime TIMESTAMP, -- Timestamp of the last time the job was run
+    last_run_status VARCHAR(50), -- Status of the last run (e.g., 'SUCCESS', 'FAILED', 'RUNNING')
+    last_successful_run_datetime TIMESTAMP, -- Timestamp of the last successful run
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Record creation time
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP -- Record update time
 );
