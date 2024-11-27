@@ -1,32 +1,8 @@
-API Response (InvokeHTTP)
-    |
-    v
-RouteOnAttribute (detect HTTP errors and empty body responses)
-    |         |         |
-    |         |         +--> LogMessage (log empty body responses)
-    |         +--> LogMessage (log HTTP errors)
-    +--> success (valid HTTP responses)
-              |
-              v
-AttributesToJSON (convert JSON to FlowFile content)
-    |
-    v
-EvaluateJsonPath (extract attributes)
-    |
-    v
-RouteOnAttribute (check for empty data)
-    |         |
-    |         +--> LogMessage (log missing attributes)
-    +--> unmatched (valid attributes)
-              |
-              v
-ValidateRecord (validate JSON schema)
-    |         |
-    |         +--> LogMessage (log schema validation failures)
-    +--> success (valid JSON data)
-              |
-              v
-MergeContent (consolidate error messages)
-    |
-    v
-PutEmail (send consolidated email alert)
+CREATE TABLE job_master (
+    job_id SERIAL PRIMARY KEY,
+    process_group_id VARCHAR(255) NOT NULL,
+    process_description TEXT,
+    process_schedule_start_time TIME NOT NULL,
+    active_status BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
